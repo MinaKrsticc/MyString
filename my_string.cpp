@@ -51,9 +51,52 @@ bool MyString::operator==(const MyString& rhs)
 
 MyString MyString::operator+(const MyString& rhs)
 {
-    rhs.stringValue = this->stringValue + rhs.stringValue ;
-    return rhs.stringValue;
+    char *str;
+    int lenght = strlen(rhs.stringValue);
+    int lenThis = strlen(this->stringValue);
+    //this->stringValue = new char[lenght];
+    str = new char[lenThis+lenght];
+    strcpy(str, rhs.stringValue);
+    strcat(this->stringValue, str);
+}
 
+int MyString::length( MyString& str)
+{
+    int i = 0;
+    while(str.stringValue[i] != '\0')
+    {
+        i++;
+    }
+    return i;
+}
+
+void MyString::cat(char* newString)
+{
+    int lenght = strlen(newString);
+    this->stringValue = new char[lenght];
+    strcat(this->stringValue, newString);
+}
+
+MyString MyString::substring(int pos, int length)
+{
+    MyString newStr;
+    newStr.stringValue = new char[length];
+    int i = 0;
+    int len = strlen(this->stringValue);
+    if(length < len)
+    {
+        while(this->stringValue[i] != '\0')
+        {
+            if(pos == i)
+            {
+                for(i = pos; i < length; i++)
+                {
+                    newStr.stringValue[i] = this->stringValue[i];
+                }
+            }
+            i++;
+        }
+    }
 }
 
 char* MyString::getStringValue()
