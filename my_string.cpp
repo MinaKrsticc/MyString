@@ -17,30 +17,29 @@ MyString::~MyString()
         delete this->stringValue;
 }
 
-MyString::MyString(char* newString)
+MyString::MyString(const char* newString)
 {
     int lenght = strlen(newString);
-    this->stringValue = new char[lenght];
+    this->stringValue = new char[lenght + 1];
     strcpy(this->stringValue, newString);
 }
 
 MyString::MyString(const MyString& copy)
 {
     int lenght = strlen(copy.stringValue);
-    this->stringValue = new char[lenght];
+    this->stringValue = new char[lenght + 1];
     strcpy(this->stringValue, copy.stringValue);
 }
 
-ostream& MyString::operator<<(ostream& out)
+ostream& operator<<(ostream& out, const MyString& str)
 {
-    out << this->stringValue ;
+    out << str.stringValue;
     return out;
 }
 
-istream& MyString::operator>>(istream& in)
+istream& operator>>(istream& in, const MyString& str)
 {
-    cout << "Please enter the numerator part: ";
-    in >> this->stringValue;
+    in >> str.stringValue;
     return in;
 }
 
@@ -51,13 +50,26 @@ bool MyString::operator==(const MyString& rhs)
 
 MyString MyString::operator+(const MyString& rhs)
 {
-    char *str;
-    int lenght = strlen(rhs.stringValue);
+    //MyString strMy(this->stringValue);
+    MyString strMy(*this);
+    //MyString strMy = *this;
+    strMy.cat(rhs.stringValue);
+    /*int lenght = strlen(rhs.stringValue);
     int lenThis = strlen(this->stringValue);
-    //this->stringValue = new char[lenght];
-    str = new char[lenThis+lenght];
-    strcpy(str, rhs.stringValue);
-    strcat(this->stringValue, str);
+    strMy.stringValue = new char [lenThis + lenght + 1];
+    strcpy(strMy.stringValue, this->stringValue);
+    //delete [] this->stringValue;
+    strcat(strMy.stringValue, rhs.stringValue);
+    //this->stringValue = strMy.stringValue ;*/
+    return strMy;
+
+    /* char str = new char[lenThis + lenght + 1];
+    strcpy(str, this->stringValue);
+    strcat(str, rhs.stringValue);
+    strcpy(this->stringValue, str);
+    this->stringValue = str;
+    delete [] str;
+    return this->stringValue;*/
 }
 
 int MyString::length( MyString& str)
@@ -70,11 +82,21 @@ int MyString::length( MyString& str)
     return i;
 }
 
+int MyString::len()
+{
+    int n = strlen(this->stringValue);
+    return n;
+}
+
 void MyString::cat(char* newString)
 {
     int lenght = strlen(newString);
-    this->stringValue = new char[lenght];
-    strcat(this->stringValue, newString);
+    int lenThis = strlen(this->stringValue);
+    char *str = new char[lenght + lenThis + 1];
+    strcpy(str, this->stringValue);
+    delete [] this->stringValue;
+    strcat(str, newString);
+    this->stringValue = str;
 }
 
 MyString MyString::substring(int pos, int length)
@@ -93,9 +115,66 @@ MyString MyString::substring(int pos, int length)
                 {
                     newStr.stringValue[i] = this->stringValue[i];
                 }
+                newStr.stringValue[length] = '\0';
             }
             i++;
         }
+    }
+    return newStr.stringValue;
+}
+
+int MyString::stringcmp(char* a, char* b)
+{
+    int lenA = strlen(a);
+    int lenB = strlen(b);
+    int i = 0;
+
+    if(lenA == lenB)
+    {
+        while (i < lenA)
+        {
+            if(a[i] == b[i])
+            {
+                i++;
+            }
+        }
+        if(i == lenA)
+        {
+            return 0;
+        }
+    }
+    else
+    {
+        return -1;
+    }
+}
+
+bool MyString::isSubstring(char* str, char* substr)
+{
+    int n = strlen(str);
+    int m = strlen(substr);
+    int i;
+    int j = 0;
+    //char pom;
+    char* pomString;
+    pomString =  new char [m];
+    // pom = substr[j];
+
+    for(i = 0; i < n; i++)
+    {
+        if(substr[j] == str[i])
+        {
+            pomString[j] = substr[j];
+            j++;
+            if(j >= m)
+            {
+                if(strcmp(substr, pomString) == 0)
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }
 
