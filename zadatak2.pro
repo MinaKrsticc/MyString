@@ -8,4 +8,5 @@ SOURCES += \
         my_string.cpp
 
 HEADERS += \
+    exception.h \
     my_string.h

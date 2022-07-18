@@ -1,6 +1,7 @@
 #ifndef MY_STRING_H
 #define MY_STRING_H
 #include <iostream>
+#include <exception>
 using namespace std;
 
 namespace my_string {
@@ -14,6 +15,7 @@ private:
 
 public:
     MyString();
+    MyString(int len);
     MyString(const MyString&);//konstruktor kopije
     MyString(const char* newString);
     ~MyString();//destruktor
@@ -21,8 +23,10 @@ public:
     int length(MyString& rhs);
     int len();
     void cat(char* newString);
-    bool isSubstring(char* str, char* substr);
+    bool isSubstring(char* substr);
     MyString substring(int pos, int length);
+
+    MyString append(int pos, char* str);
 
     friend istream& operator>>(istream& in, const MyString& str);
     friend ostream& operator<<(ostream& out, const MyString& str);
