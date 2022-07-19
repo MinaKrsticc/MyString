@@ -131,10 +131,9 @@ MyString MyString::substring(int pos, int length)
     {
         if(length + pos <= len)
         {
-            for(i = pos; i < length + pos; i++)
+            for(i = 0; i < length; i++)
             {
-                newStr.stringValue[j] = this->stringValue[i];
-                j++;
+                newStr.stringValue[i] = this->stringValue[pos + i];
             }
             newStr.stringValue[length] = '\0';
         }

@@ -24,8 +24,7 @@ int main()
         cout << a << " je a" <<endl;
         MyString b(str2);
         cout << b << " je b" <<endl;
-        cout << b.isSubstring(str)<<" b.isSubstring(str)" <<endl;
-        //cout << a.len() << endl;
+        cout << b.isSubstring(str)<< " b.isSubstring(str)" <<endl;
         MyString c(b);
 
         cout << c << endl;
@@ -49,10 +48,8 @@ int main()
         cout << d.isSubstring(str)<<" d.isSubstring(str)" <<endl;
         cout << e <<endl;
         MyString f = e.append(3, str1);
-        cout << f <<" f = e.append(3, str1)" <<endl;
+        cout << f << " f = e.append(3, str1)" <<endl;
 
-        //a.cat(b);
-        //a.substring(pos, len);
     }
 
     catch(my_base_exception& ex)
