@@ -33,15 +33,15 @@ struct NullPointerException : std::exception {
 };
 
 struct NegativeArgumentException : std::exception {
-    const char* what() const noexcept {return "NotPositiveValueToPosition\n";}
+    const char* what() const noexcept {return "NegativeArgumentException\n";}
 };
 
 struct NotCorrectPositionException : std::exception {
-    const char* what() const noexcept {return "NotCorectPosition\n";}
+    const char* what() const noexcept {return "NotCorrectPositionException\n";}
 };
 
 struct NotCorrectLenthSubStringException : std::exception {
-    const char* what() const noexcept {return "NotCorrectLenthSubString\n";}
+    const char* what() const noexcept {return "NotCorrectLenthSubStringException\n";}
 };
 
 struct NotPositionInStringException : std::exception {

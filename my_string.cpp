@@ -16,8 +16,7 @@ MyString::MyString()
 MyString::MyString(int len)
 {
     len = strlen(this->stringValue);
-    this->stringValue = new char[len];
-    //this->stringValue = nullptr;
+    this->stringValue = new char[len + 1];
 }
 
 MyString::~MyString()
@@ -126,30 +125,27 @@ MyString MyString::substring(int pos, int length)
     MyString newStr(length);
     //MyString newStr = new char [length];
     int i = 0;
-    int j = 0;
     int len = strlen(this->stringValue);
 
-    if (pos >= 0 && length + pos <= len)
+    if (pos >= 0)
     {
-        while(this->stringValue[i] != '\0')
+        if(length + pos <= len)
         {
-            if(pos == i)
+            for(i = pos; i < length + pos; i++)
             {
-                for(i = pos; i < length + pos; i++)
-                {
-                    newStr.stringValue[j] = this->stringValue[i];
-                    j++;
-                }
-                newStr.stringValue[length] = '\0';
+                newStr.stringValue[j] = this->stringValue[i];
+                j++;
             }
-            i++;
+            newStr.stringValue[length] = '\0';
+        }
+        else
+        {
+            throw NotCorrectPositionException();
         }
     }
     else
     {
         throw NegativeArgumentException();
-        throw NotCorrectPositionException();
-
     }
     return newStr.stringValue;
 }
@@ -195,42 +191,44 @@ bool MyString::isSubstring(char* substr)
     int n = strlen(this->stringValue);
     int m = strlen(substr);
 
-    if(n > m)
+    if(n < m)
     {
         throw NotCorrectLenthSubStringException();
     }
-
-    int i;
-    int j = 0;
-    //char pom;
-    char* pomString =  new char [m];
-    // pom = substr[j];
-    if(n < m)
-    {
-        delete [] pomString;
-        return 0;
-    }
     else
     {
-        for(i = 0; i < n; i++)
+        int i;
+        int j = 0;
+        //char pom;
+        char* pomString =  new char [m];
+        // pom = substr[j];
+        if(n < m)
         {
-            if(substr[j] == this->stringValue[i])
+            delete [] pomString;
+            return 0;
+        }
+        else
+        {
+            for(i = 0; i < n; i++)
             {
-                pomString[j] = substr[j];
-                j++;
-                if(j >= m)
+                if(substr[j] == this->stringValue[i])
                 {
-                    int comp = strcmp(substr, pomString);
-                    if(comp == 0)
+                    pomString[j] = substr[j];
+                    j++;
+                    if(j >= m)
                     {
-                        delete [] pomString;
-                        return 1;
+                        int comp = strcmp(substr, pomString);
+                        if(comp == 0)
+                        {
+                            delete [] pomString;
+                            return 1;
+                        }
                     }
                 }
             }
+            delete [] pomString;
+            return 0;
         }
-        delete [] pomString;
-        return 0;
     }
 }
 
