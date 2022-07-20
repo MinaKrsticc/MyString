@@ -10,8 +10,8 @@ class MyString{
 private:
     char *stringValue;
     int stringcmp(char* a, char*b);
-    char* getStringValue();
-    void setStringValue(char* newStringValue);
+    //char* getStringValue();
+    //void setStringValue(char* newStringValue);
 
 public:
     MyString();
@@ -20,13 +20,12 @@ public:
     MyString(const char* newString);
     ~MyString();//destruktor
 
-    int length(MyString& rhs);
     int len();
     void cat(char* newString);
     bool isSubstring(char* substr);
-    MyString substring(int pos, int length);
+    void substring(int pos, int length);
 
-    MyString append(int pos, char* str);
+    void append(int pos, char* str);
 
     friend istream& operator>>(istream& in, const MyString& str);
     friend ostream& operator<<(ostream& out, const MyString& str);
