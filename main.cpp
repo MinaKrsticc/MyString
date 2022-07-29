@@ -10,18 +10,19 @@ int main()
 {
     int pos = 3;
     int len = 3;
-    char* n;
+    MyString n;
     char str[] = {"str"};
     cout << str << " je str" <<endl;
-    char str1[] = {"aaaaa"};
+    char str1[] = {"karamele"};
     cout << str1 << " je str1" <<endl;
-    char str2[] = {"karamele"};
+    char str2[] = {"aleksa"};
     cout << str2 << " je str2 " <<endl;
-    MyString a("mmmmmm");
+    MyString a("aleksandar");
     cout << a << " je a" <<endl;
     MyString j("mmmmmm");
     cout << j << " je j" <<endl;
-    if (a == a)
+    MyString b(str2);
+    if (a == b)
     {
         cout << " true" <<endl;
     }
@@ -30,13 +31,11 @@ int main()
         cout << " false" <<endl;
     }
 
-    cout << " unesi tvoj string n: " << endl;
+   /* cout << " unesi tvoj string n: " << endl;
     cin >> n ;
-    cout << n << " n je" << endl;
-
+    cout << n << " n je" << endl; */
     try
     {
-
         MyString b(str2);
         cout << b << " je b" <<endl;
         b.isSubstring(str);
@@ -44,12 +43,13 @@ int main()
 
         MyString c(b);
         cout << c << endl;
-        MyString d = c;
-        cout << d << " je d" <<endl;
+        MyString p = c;
+        cout << p << " je p" <<endl;
         MyString e = a + b;
         cout << e << " je e" <<endl;
-        d = e + b;
-        cout << d << " d = e + b" << endl;
+        MyString d;
+       /* d = e + b;
+        cout << d << " d = e + b" << endl; */
 
         a.cat(str1);
         cout << a << " a.cat(str1)" << endl;

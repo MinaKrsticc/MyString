@@ -9,9 +9,9 @@ namespace my_string {
 class MyString{
 private:
     char *stringValue;
-    int stringcmp(char* a, char*b);
     //char* getStringValue();
     //void setStringValue(char* newStringValue);
+    int stringcmp(char* a, char*b);
 
 public:
     MyString();
@@ -20,6 +20,7 @@ public:
     MyString(const char* newString);
     ~MyString();//destruktor
 
+    int length(MyString& rhs);
     int len();
     void cat(char* newString);
     bool isSubstring(char* substr);

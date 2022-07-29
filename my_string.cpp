@@ -56,7 +56,12 @@ istream& operator>>(istream& in, const MyString& str)
 
 bool MyString::operator==(const MyString& rhs)
 {
-    return this->stringValue == rhs.stringValue;
+    int cmpStr = strcmp(rhs.stringValue, this->stringValue);
+    if(cmpStr == 0)
+    {
+        return true;
+    }
+    else return false;
 }
 
 MyString MyString::operator+(const MyString& rhs)
@@ -70,6 +75,20 @@ MyString MyString::operator+(const MyString& rhs)
     MyString strMy(*this);
     strMy.cat(rhs.stringValue);
     return strMy;
+}
+
+int MyString::length(MyString& str)
+{
+    if(str.stringValue == nullptr)
+    {
+        throw NullPointerException();
+    }
+    int i = 0;
+    while(str.stringValue[i] != '\0')
+    {
+        i++;
+    }
+    return i;
 }
 
 int MyString::len()
@@ -95,7 +114,10 @@ void MyString::cat(char* newString)
     strcpy(str, this->stringValue);
     delete [] this->stringValue;
     strcat(str, newString);
-    this->stringValue = str;
+    this->stringValue = str; 
+
+    int s = stringcmp(this->stringValue, newString);
+    cout << s << endl;
 }
 
 void MyString::substring(int pos, int length)
@@ -129,7 +151,6 @@ void MyString::substring(int pos, int length)
     {
         throw NegativeArgumentException();
     }
-    //return newStr.stringValue;
 }
 
 int MyString::stringcmp(char* a, char* b)
@@ -138,28 +159,31 @@ int MyString::stringcmp(char* a, char* b)
     {
         throw NullPointerException();
     }
-
     int lenA = strlen(a);
     int lenB = strlen(b);
     int i = 0;
+    int ret;
 
-    if(lenA == lenB)
+    while (a[i] != '\0' && b[i] != '\0')
     {
-        while (i < lenA)
+        if(a[i] == b[i])
         {
-            if(a[i] == b[i])
-            {
-                i++;
-            }
+            i++;
         }
-        if(i == lenA)
+        else
         {
-            return 0;
+            ret = a[i] - b[i];
+            return ret;
         }
     }
-    else
+    if(i == lenA - 1 && i == lenB - 1)
     {
-        return -1;
+        return 0;
+    }
+    else if(a[i] == '\0' || b[i] == '\0')
+    {
+        ret = a[i] - b[i];
+        return ret;
     }
 }
 
@@ -251,6 +275,6 @@ void MyString::append(int pos, char* str)
     {
         throw NotPositionInStringException();
     }
-    //return newStr.stringValue;
 }
+
 };
