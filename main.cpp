@@ -3,6 +3,9 @@
 #include "my_string.h"
 #include "exception.h"
 #include <string.h>
+#include <vector>
+#include <iterator>
+
 using namespace std;
 using namespace my_string;
 
@@ -22,6 +25,15 @@ int main()
     MyString j("mmmmmm");
     cout << j << " je j" <<endl;
     MyString b(str2);
+
+    istream_iterator<char*> inter(MyString);
+    MyString str3("Neki string");
+
+    for(auto& x : str3)
+    {
+      std::cout << x << std::endl;
+    }
+
     if (a == b)
     {
         cout << " true" <<endl;

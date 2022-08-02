@@ -8,5 +8,6 @@ SOURCES += \
         my_string.cpp
 
 HEADERS += \
+    Iterator.h \
     exception.h \
     my_string.h
