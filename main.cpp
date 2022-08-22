@@ -2,6 +2,7 @@
 #include <exception>
 #include "my_string.h"
 #include "exception.h"
+#include "Iterator.h"
 #include <string.h>
 #include <vector>
 #include <iterator>
@@ -26,12 +27,12 @@ int main()
     cout << j << " je j" <<endl;
     MyString b(str2);
 
-    istream_iterator<char*> inter(MyString);
+   //istream_iterator<char*> i(MyString);
     MyString str3("Neki string");
 
-    for(auto& x : str3)
+    for( auto i = str3.begin(); i != str3.end(); i++)
     {
-      std::cout << x << std::endl;
+      std::cout << (*i)[0] << " OVO "<< std::endl;
     }
 
     if (a == b)
@@ -61,7 +62,7 @@ int main()
         cout << e << " je e" <<endl;
         MyString d;
        /* d = e + b;
-        cout << d << " d = e + b" << endl; */
+        cout << d << " d = e + b" << endl;*/
 
         a.cat(str1);
         cout << a << " a.cat(str1)" << endl;

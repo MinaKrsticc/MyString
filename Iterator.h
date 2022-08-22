@@ -1,22 +1,30 @@
 #ifndef ITERATOR_H
 #define ITERATOR_H
 #include "my_string.h"
-using namespace std;
-using namespace my_string;
+#include <string.h>
 
-struct MyStringIterator
+using namespace std;
+namespace my_string
+{
+class MyStringIterator
 {
 private:
 
-    MyString *m_ptr;
+    char *m_ptr;
 
 public:
+
+    explicit MyStringIterator (char* myStr)
+    {
+        this->m_ptr = myStr;
+    }
 
     // Prefix increment
     MyStringIterator& operator++()
     {
-        m_ptr++; return *this;
-    };
+        m_ptr++;
+        return *this;
+    }
 
     // Postfix increment
     MyStringIterator operator++(int)
@@ -24,26 +32,23 @@ public:
         MyStringIterator tmp = *this;
         ++(*this);
         return tmp;
-    };
+    }
+
+    char* operator* ()
+    {
+        return m_ptr;
+    }
 
     friend bool operator== (const MyStringIterator& a, const MyStringIterator& b)
     {
         return a.m_ptr == b.m_ptr;
-    };
+    }
 
     friend bool operator!= (const MyStringIterator& a, const MyStringIterator& b)
     {
         return a.m_ptr != b.m_ptr;
-    };
+    }
 
-    MyStringIterator begin()
-    {
-        return m_ptr[0];
-    };
-
-    MyStringIterator end()
-    {
-        return MyStringIterator(&m_ptr[strlen(m_ptr)]);
-    };
 };
+}
 #endif // ITERATOR_H

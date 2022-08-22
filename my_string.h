@@ -2,6 +2,8 @@
 #define MY_STRING_H
 #include <iostream>
 #include <exception>
+#include "Iterator.h"
+
 using namespace std;
 
 namespace my_string {
@@ -12,8 +14,10 @@ private:
     //char* getStringValue();
     //void setStringValue(char* newStringValue);
     int stringcmp(char* a, char*b);
+    friend class MyStringIterator;
 
 public:
+
     MyString();
     MyString(int len);
     MyString(const MyString&);//konstruktor kopije
@@ -32,6 +36,19 @@ public:
     friend ostream& operator<<(ostream& out, const MyString& str);
     bool operator==(const MyString& rhs);
     MyString operator+(const MyString& rhs);
+
+    MyStringIterator begin()
+    {
+        MyStringIterator it(&this->stringValue[0]);
+        return it;
+    }
+
+    MyStringIterator end()
+    {
+        int len = this->len();
+        MyStringIterator it(&this->stringValue[len - 1]);
+        return it;
+    }
 
 };
 

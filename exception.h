@@ -23,7 +23,6 @@ struct my_base_exception : std::exception {
 
     const char* what() const noexcept
     {
-
         return errorMessage.c_str();
     }
 };
