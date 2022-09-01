@@ -31,6 +31,8 @@ public:
     MyString substring(int pos, int length);
 
     MyString append(int pos, char* str);
+    MyString append1(int pos, char* str);
+
 
     friend istream& operator>>(istream& in, const MyString& str);
     friend ostream& operator<<(ostream& out, const MyString& str);

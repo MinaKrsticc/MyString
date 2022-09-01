@@ -220,7 +220,7 @@ bool MyString::isSubstring(char* substr)
     int i;
     int j;
 
-    for( i = 0; i <= m; i++)
+    for( i = 0; i < m; i++)
     {
         for(j = 0; j < n; j++)
         {
@@ -276,6 +276,22 @@ bool MyString::isSubstring(char* substr)
     return false;
 }*/
 
+MyString MyString::append1(int pos, char* str)
+{
+    if (str == nullptr || this->stringValue == nullptr)
+    {
+        throw NullPointerException();
+    }
+
+    int n = strlen(this->stringValue);
+    MyString newStr = this->substring(0, pos);
+    newStr.cat(str);
+    MyString pomStr = this->substring(pos, n - pos);
+    newStr = newStr + pomStr;
+
+    return newStr;
+}
+
 MyString MyString::append(int pos, char* str)
 {
     if (str == nullptr || this->stringValue == nullptr)
@@ -288,24 +304,20 @@ MyString MyString::append(int pos, char* str)
     MyString newStr;
     newStr.stringValue = new char [m + n];
     int i = 0;
-    int j = 0;
 
     if(pos <= n)
     {
         for(i = 0; i < pos; i++)
         {
-            newStr.stringValue[j] = this->stringValue[i];
-            j++;
+            newStr.stringValue[i] = this->stringValue[i];
         }
         for(i = 0; i < m; i++)
         {
-            newStr.stringValue[j] = str[i];
-            j++;
+            newStr.stringValue[pos + i] = str[i];
         }
         for(i = pos; i < n; i++)
         {
-            newStr.stringValue[j] = this->stringValue[i];
-            j++;
+            newStr.stringValue[i + m] = this->stringValue[i];
         }
         newStr.stringValue[m + n] = '\0';
     }

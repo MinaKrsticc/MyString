@@ -24,7 +24,6 @@ int main()
     MyString j("mmmmmm");
     cout << j << " je j" <<endl;
     MyString b(str2);
-
     MyString str3("Neki string");
 
     for( auto i = str3.begin(); i != str3.end(); i++)
@@ -46,7 +45,6 @@ int main()
     cout << n << " n je" << endl; */
     try
     {
-        MyString b(str2);
         cout << b << " je b" <<endl;
         cout << b.isSubstring(str) << " b.isSubstring(str)" <<endl;
 
@@ -78,6 +76,10 @@ int main()
 
         x = e.append(3, str1);
         cout << x << " je x = e.append(3, str1)" <<endl;
+
+        x = e.append1(2, str1);
+        cout << x << " je x = e.append1(3, str1)" <<endl;
+
     }
 
     catch(my_base_exception& ex)
