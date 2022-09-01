@@ -28,15 +28,14 @@ public:
     int len();
     void cat(char* newString);
     bool isSubstring(char* substr);
-    MyString substring(int pos, int length);
+    void substring(int pos, int length);
 
-    MyString append(int pos, char* str);
+    void append(int pos, char* str);
 
     friend istream& operator>>(istream& in, const MyString& str);
     friend ostream& operator<<(ostream& out, const MyString& str);
     bool operator==(const MyString& rhs);
     MyString operator+(const MyString& rhs);
-    MyString operator=(const MyString& rhs);
 
     MyStringIterator begin()
     {

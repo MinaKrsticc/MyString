@@ -77,25 +77,6 @@ MyString MyString::operator+(const MyString& rhs)
     return strMy;
 }
 
-MyString MyString::operator=(const MyString& rhs)
-{
-    if(rhs.stringValue == nullptr || this->stringValue == nullptr)
-    {
-        throw NullPointerException();
-    }
-    if(rhs.stringValue == this->stringValue)
-    {
-        return *this;
-    }
-    else
-    {
-        delete [] this->stringValue;
-        this->stringValue = new char [strlen(rhs.stringValue) + 1];
-        strcpy(this->stringValue, rhs.stringValue);
-        return *this;
-    }
-}
-
 int MyString::length(MyString& str)
 {
     if(str.stringValue == nullptr)
@@ -133,13 +114,13 @@ void MyString::cat(char* newString)
     strcpy(str, this->stringValue);
     delete [] this->stringValue;
     strcat(str, newString);
-    this->stringValue = str;
+    this->stringValue = str; 
 
-    //int s = stringcmp(this->stringValue, newString);
-    //cout << s << endl;
+    int s = stringcmp(this->stringValue, newString);
+    cout << s << endl;
 }
 
-MyString MyString::substring(int pos, int length)
+void MyString::substring(int pos, int length)
 {
     if (this->stringValue == nullptr)
     {
@@ -170,8 +151,6 @@ MyString MyString::substring(int pos, int length)
     {
         throw NegativeArgumentException();
     }
-    //cout<< newStr.stringValue <<endl;
-    return newStr;
 }
 
 int MyString::stringcmp(char* a, char* b)
@@ -217,108 +196,51 @@ bool MyString::isSubstring(char* substr)
 
     int n = strlen(this->stringValue);
     int m = strlen(substr);
-    int i;
-    int j;
 
-    for( i = 0; i <= m; i++)
-    {
-        for(j = 0; j < n; j++)
-        {
-            if(this->stringValue[j] == substr[i])
-                break;
-        }
-        if(i == m)
-            return true;
-    }
-    return false;
-}
-
-/*bool MyString::isSubstring(char* substr)
-{
-    if (substr == nullptr || this->stringValue == nullptr)
-    {
-        throw NullPointerException();
-    }
-
-    int n = strlen(this->stringValue);
-    int m = strlen(substr);
-    int i;
-    int j = 0;
-    char* pomString = new char [m + 1];
-    int comp;
     if(n < m)
     {
         throw NotCorrectLenthSubStringException();
-        delete [] pomString;
-        return false;
     }
     else
     {
-        for(i = 0; i < n; i++)
+        int i;
+        int j = 0;
+        //char pom;
+        char* pomString = new char [m];
+        // pom = substr[j];
+        if(n < m)
         {
-            if(substr[j] == this->stringValue[i])
+            delete [] pomString;
+            return false;
+        }
+        else
+        {
+            for(i = 0; i < n; i++)
             {
-                pomString[j] = substr[j];
-                j++;
-            }
-            if(j >= m)
-            {
-                comp = strcmp(substr, pomString);
-                if(comp == 0)
+                if(substr[j] == this->stringValue[i])
                 {
-                    delete [] pomString;
-                    return true;
+                    pomString[j] = substr[j];
+                    j++;
+                    if(j >= m)
+                    {
+                        int comp = strcmp(substr, pomString);
+                        if(comp == 0)
+                        {
+                            delete [] pomString;
+                            return true;
+                        }
+                    }
                 }
             }
+            delete [] pomString;
+            return false;
         }
     }
-    delete [] pomString;
-    return false;
-}*/
-
-MyString MyString::append(int pos, char* str)
-{
-    if (str == nullptr || this->stringValue == nullptr)
-    {
-        throw NullPointerException();
-    }
-
-    int n = strlen(this->stringValue);
-    int m = strlen(str);
-    MyString newStr;
-    newStr.stringValue = new char [m + n];
-    int i = 0;
-    int j = 0;
-
-    if(pos <= n)
-    {
-        for(i = 0; i < pos; i++)
-        {
-            newStr.stringValue[j] = this->stringValue[i];
-            j++;
-        }
-        for(i = 0; i < m; i++)
-        {
-            newStr.stringValue[j] = str[i];
-            j++;
-        }
-        for(i = pos; i < n; i++)
-        {
-            newStr.stringValue[j] = this->stringValue[i];
-            j++;
-        }
-        newStr.stringValue[m + n] = '\0';
-    }
-    else
-    {
-        throw WrongArgumentException();
-    }
-    return newStr;
 }
 
-/* MyString MyString::append1(int pos, char* str)
+void MyString::append(int pos, char* str)
 {
-    if (str == nullptr || this->stringValue == nullptr)
+    if (str == nullptr && this->stringValue)
     {
         throw NullPointerException();
     }
@@ -351,8 +273,8 @@ MyString MyString::append(int pos, char* str)
     }
     else
     {
-        throw WrongArgumentException();
+        throw NotPositionInStringException();
     }
-    return newStr;
-}*/
+}
+
 };

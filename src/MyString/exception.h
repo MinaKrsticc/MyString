@@ -43,8 +43,8 @@ struct NotCorrectLenthSubStringException : std::exception {
     const char* what() const noexcept {return "NotCorrectLenthSubStringException\n";}
 };
 
-struct WrongArgumentException : std::exception {
-    const char* what() const noexcept {return "WrongArgumentException\n";}
+struct NotPositionInStringException : std::exception {
+    const char* what() const noexcept {return "NotPositionInStringException\n";}
 };
 
 }

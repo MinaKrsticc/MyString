@@ -12,6 +12,8 @@ using namespace my_string;
 
 int main()
 {
+    int pos = 3;
+    int len = 3;
     MyString n;
     char str[] = {"str"};
     cout << str << " je str" <<endl;
@@ -25,6 +27,7 @@ int main()
     cout << j << " je j" <<endl;
     MyString b(str2);
 
+   //istream_iterator<char*> i(MyString);
     MyString str3("Neki string");
 
     for( auto i = str3.begin(); i != str3.end(); i++)
@@ -48,7 +51,8 @@ int main()
     {
         MyString b(str2);
         cout << b << " je b" <<endl;
-        cout << b.isSubstring(str) << " b.isSubstring(str)" <<endl;
+        b.isSubstring(str);
+        cout << b << " b.isSubstring(str)" <<endl;
 
         MyString c(b);
         cout << c << endl;
@@ -56,28 +60,26 @@ int main()
         cout << p << " je p" <<endl;
         MyString e = a + b;
         cout << e << " je e" <<endl;
-        MyString d("hahahah");
-        cout << d << endl;
-        d = e + b;
-        cout << d << " d = e + b" << endl;
+        MyString d;
+       /* d = e + b;
+        cout << d << " d = e + b" << endl;*/
 
         a.cat(str1);
         cout << a << " a.cat(str1)" << endl;
         e.cat(str);
         cout << e << " e.cat(str)" << endl;
 
-        MyString x = a.substring(3,2);
-        //MyString y;
-        //y = a.substring(3, 2);
-        cout << x << " je x{a.substring(3,2)};" <<endl;
-        char pom[] = {"aleksa"};
-        cout << d.isSubstring(pom) <<" d.isSubstring(str)" <<endl;
+        a.substring(pos, len);
+        cout << a << " a.substring(5, 3)" << endl;
+        a.substring(3, 5);
+        cout << a << " je  a.substring(3, 5)" <<endl;
 
-        cout << "je e " << e <<endl;
-        cout << "je x " << x <<endl;
+        bool IsSubStr = d.isSubstring(str);
+        cout << IsSubStr<<" d.isSubstring(str)" <<endl;
 
-        x = e.append(3, str1);
-        cout << x << " je x = e.append(3, str1)" <<endl;
+        cout << e <<endl;
+        e.append(3, str1);
+        cout << e << "  e.append(3, str1)" <<endl;
     }
 
     catch(my_base_exception& ex)
@@ -105,7 +107,7 @@ int main()
         cout << ex.what() <<endl;
     }
 
-    catch (WrongArgumentException ex)
+    catch (NotPositionInStringException ex)
     {
         cout << ex.what() <<endl;
     }
